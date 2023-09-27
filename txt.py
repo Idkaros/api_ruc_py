@@ -28,11 +28,11 @@ def insertar():
                         "|"
                     )
                     sq.insertar_txt(ruc, apellinombre, dv, codigo, estado)
-
             os.remove(txt_file_path)
 
+def insertar1raVez():
+    # Insertamos todo lo que está en los txt's, asumiendo que la BD está vacia
 
-def insertar2():
     # Carpeta actual
     carpeta_actual = os.getcwd()
 
