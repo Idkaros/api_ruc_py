@@ -1,0 +1,4 @@
+crear_estructura_de_tablas
+descomprimir archivo zip
+validar que no exista contenido de los arcihvos en la BD sqlite e insertar si no existen
+eliminar archivos txt
