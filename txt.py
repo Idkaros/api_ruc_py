@@ -44,22 +44,25 @@ def insertar1raVez():
 
     # Recorrer los archivos
     for file in files:
-        # Conectar a la base de datos
-        conn = sqlite3.connect("ruc.db")
-        cursor = conn.cursor()
-
-        # Iniciar una transacción
-        conn.execute("BEGIN")
-
         # Validar que el archivo sea txt
         if file.endswith(".txt"):
+            # Conectar a la base de datos
+            conn = sqlite3.connect("ruc.db")
+            cursor = conn.cursor()
+
+            # Iniciar una transacción
+            conn.execute("BEGIN")
             # Ruta de 1 archivo txt
             txt_file_path = os.path.join(carpeta_txt, file)
 
             # Abrir el archivo
             with open(txt_file_path, "r", encoding="utf-8") as archivo:
                 # Recorrer las líneas
-                for linea in archivo:                    
+                for linea in archivo:
+                    # Si hay más de 5 campos, saltar
+                    if linea.count("|") > 5:
+                        continue
+                    
                     # Tomar datos de la línea
                     ruc, apellinombre, dv, codigo, estado, fin = linea.strip().split(
                         "|"
