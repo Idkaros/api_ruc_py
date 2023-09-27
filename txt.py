@@ -1,6 +1,7 @@
 import os
 import sqlite as sq
 import sqlite3
+#import datetime
 
 # Carpeta actual
 carpeta_actual = os.getcwd()
@@ -77,7 +78,9 @@ def insertar1raVez():
 
 def escribir_error(texto):
     try:
-        error_file_path = os.path.join(carpeta_actual, "RUCs con errores.txt")
+        #fecha_hora_actual = datetime.datetime.now()
+        #nombre_fecha = fecha_hora_actual.strftime("%y%m%d_%H%M%S")
+        error_file_path = os.path.join(carpeta_actual, f"RUCs con errores.txt")
         with open(error_file_path, 'a') as archivo:
             archivo.write(texto)
         print(f"Se ha escrito el texto en el archivo: {error_file_path}")
