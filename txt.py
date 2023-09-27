@@ -59,25 +59,17 @@ def insertar1raVez():
             # Abrir el archivo
             with open(txt_file_path, "r", encoding="utf-8") as archivo:
                 # Recorrer las líneas
-                for linea in archivo:
+                for linea in archivo:                    
                     # Tomar datos de la línea
                     ruc, apellinombre, dv, codigo, estado, fin = linea.strip().split(
                         "|"
                     )
 
-                    # Consultar por el RUC en cuestión
                     cursor.execute(
-                        "SELECT COUNT(*) FROM contribuyentes WHERE ruc LIKE ?",
-                        ("%" + ruc + "%",),
+                        "INSERT INTO contribuyentes(ruc, apellinombre, dv, codigo, estado) VALUES (?, ?, ?, ?, ?)",
+                        (ruc, apellinombre, dv, codigo, estado),
                     )
-                    resultado = cursor.fetchone()
 
-                    # Si no existe el RUC, insertar
-                    if resultado[0] == 0:
-                        cursor.execute(
-                            "INSERT INTO contribuyentes(ruc, apellinombre, dv, codigo, estado) VALUES (?, ?, ?, ?, ?)",
-                            (ruc, apellinombre, dv, codigo, estado),
-                        )
             # Comiteamos los datos y cerramos la conexión
             conn.commit()
             conn.close()
