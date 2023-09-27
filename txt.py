@@ -2,13 +2,13 @@ import os
 import sqlite as sq
 import sqlite3
 
+# Carpeta actual
+carpeta_actual = os.getcwd()
+
+# Concatenar la ruta actual con la carpeta "txt_files"
+carpeta_txt = os.path.join(carpeta_actual, "txt_files")
 
 def insertar():
-    # Carpeta actual
-    carpeta_actual = os.getcwd()
-
-    # Concatenar la ruta actual con la carpeta "txt_files"
-    carpeta_txt = os.path.join(carpeta_actual, "txt_files")
 
     # Listar todos los archivos en la carpeta actual
     files = os.listdir(carpeta_txt)
@@ -32,12 +32,6 @@ def insertar():
 
 def insertar1raVez():
     # Insertamos todo lo que está en los txt's, asumiendo que la BD está vacia
-
-    # Carpeta actual
-    carpeta_actual = os.getcwd()
-
-    # Concatenar la ruta actual con la carpeta "txt_files"
-    carpeta_txt = os.path.join(carpeta_actual, "txt_files")
 
     # Listar todos los archivos en la carpeta actual
     files = os.listdir(carpeta_txt)
