@@ -3,7 +3,6 @@ import sqlite3
 
 bd = "ruc.db"
 
-
 def crear_estruc():
     # Conectar a la BD o crearla si no existe
     conn = sqlite3.connect(bd)
@@ -24,6 +23,10 @@ def crear_estruc():
         """
     )
 
+    # Crear indice
+    cursor.execute('CREATE INDEX idx_contribuyentes_ruc ON contribuyentes(ruc)')
+    conn.commit()
+    conn.close()
 
 def insertar_txt():
     # 1 Recorremos los txt
