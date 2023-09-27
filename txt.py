@@ -55,6 +55,7 @@ def insertar1raVez():
                 for linea in archivo:
                     # Si hay más de 5 campos, saltar
                     if linea.count("|") > 5:
+                        escribir_error(linea)
                         continue
                     
                     # Tomar datos de la línea
@@ -73,3 +74,12 @@ def insertar1raVez():
 
             # Eliminar el archivo txt
             os.remove(txt_file_path)
+
+def escribir_error(texto):
+    try:
+        error_file_path = os.path.join(carpeta_actual, "RUCs con errores.txt")
+        with open(error_file_path, 'a') as archivo:
+            archivo.write(texto)
+        print(f"Se ha escrito el texto en el archivo: {error_file_path}")
+    except IOError as e:
+        print(f"Error al escribir en el archivo: {e}")
