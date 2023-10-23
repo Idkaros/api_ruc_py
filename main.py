@@ -2,7 +2,11 @@ import sqlite as sq
 import txt
 import zip as zp
 
-zp.unzip_ruc_files()
-sq.crear_estruc()
-txt.insertar1raVez()
+def recrearBD():
+    sq.eliminarBD()
+    sq.crear_estruc()
+    zp.unzip_ruc_files()
+    txt.insertar1raVez()
+
+recrearBD()
 print("Finalizado.")

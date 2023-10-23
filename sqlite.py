@@ -55,7 +55,6 @@ def insertar_txt():
                         (ruc, apellinombre, dv, codigo, estado),
                     )
 
-
 def insertar_txt(ruc, apellinombre, dv, codigo, estado):
     conn = sqlite3.connect(bd)
     cursor = conn.cursor()
@@ -68,7 +67,6 @@ def insertar_txt(ruc, apellinombre, dv, codigo, estado):
     if resultado[0] == 0:
         __insertar_contribuyente(ruc, apellinombre, dv, codigo, estado)
 
-
 def __insertar_contribuyente(ruc, apellinombre, dv, codigo, estado):
     conn = sqlite3.connect(bd)
     cursor = conn.cursor()
@@ -78,3 +76,10 @@ def __insertar_contribuyente(ruc, apellinombre, dv, codigo, estado):
     )
     conn.commit()
     conn.close()
+
+def eliminarBD():
+    if os.path.exists(bd):
+        os.remove(bd)
+        print("BD eliminada")
+    else:
+        print("La BD no existe")
