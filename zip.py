@@ -12,9 +12,11 @@ def unzip_ruc_files():
 
 	# Concatenar la ruta actual con la carpeta "txt_files"
 	carpeta_txt = os.path.join(carpeta_actual, 'txt_files')
+	if not os.path.exists(carpeta_txt): os.makedirs(carpeta_txt)
 
 	# Concatenar la ruta actual con la carpeta "zip_files"
 	carpeta_zip = os.path.join(carpeta_actual, 'zip_files')
+	if not os.path.exists(carpeta_zip): os.makedirs(carpeta_zip)
 
 	# Listar todos los archivos en la carpeta "zip_files"
 	files = os.listdir(carpeta_zip)
