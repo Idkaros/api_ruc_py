@@ -31,6 +31,7 @@ carpeta_txt = os.path.join(carpeta_actual, "txt_files")
 #                    sq.insertar_txt(ruc, apellinombre, dv, codigo, estado)
 #            os.remove(txt_file_path)
 
+
 def insertar1raVez():
     # Insertamos todo lo que está en los txt's, asumiendo que la BD está vacia
 
@@ -54,11 +55,15 @@ def insertar1raVez():
             with open(txt_file_path, "r", encoding="utf-8") as archivo:
                 # Recorrer las líneas
                 for linea in archivo:
+                    ## Si ha más de 2 pipes, reemplazar por 1
+                    # if validar_primera_ocurrencia(linea, "||"):
+                    #    linea = linea.replace("||", "|")
+
                     # Si hay más de 5 campos, saltar
                     if linea.count("|") > 5:
                         escribir_error(linea)
                         continue
-                    
+
                     # Tomar datos de la línea
                     ruc, apellinombre, dv, codigo, estado, fin = linea.strip().split(
                         "|"
@@ -76,13 +81,22 @@ def insertar1raVez():
             # Eliminar el archivo txt
             os.remove(txt_file_path)
 
+
 def escribir_error(texto):
     try:
         #fecha_hora_actual = datetime.datetime.now()
         #nombre_fecha = fecha_hora_actual.strftime("%y%m%d_%H%M%S")
         error_file_path = os.path.join(carpeta_actual, f"RUCs con errores.txt")
-        with open(error_file_path, 'a') as archivo:
+        with open(error_file_path, "a") as archivo:
             archivo.write(texto)
         print(f"Se ha escrito el texto en el archivo: {error_file_path}")
     except IOError as e:
         print(f"Error al escribir en el archivo: {e}")
+
+
+def validar_primera_ocurrencia(string, palabra_a_buscar):
+    # Utiliza una expresión regular para buscar la palabra al comienzo de la cadena
+    pattern = f"^{re.escape(palabra_a_buscar)}"
+    if re.search(pattern, string):
+        return True
+    return False
