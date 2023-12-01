@@ -1,4 +1,11 @@
+Lista de funciones
 crear_estructura_de_tablas
 descomprimir archivo zip
 validar que no exista contenido de los arcihvos en la BD sqlite e insertar si no existen
 eliminar archivos txt
+
+Entorno:
+Python 3.12.0
+Flask 3.0.0
+Flask-RESTful 0.3.10
+flask-restplus-0.13.0
