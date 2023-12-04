@@ -20,20 +20,23 @@ def index():
 
 @app.route('/zips', methods=['POST'])
 def upload_zips():
-    if 'file' not in request.files:
+    if 'files' not in request.files:
         return jsonify({'error': 'No se ha proporcionado ningún archivo'}), 400
     
-    file = request.files['file']
+    files = request.files.getlist('files')
     
-    if file.filename == '':
-        return jsonify({'error': 'Nombre de archivo vacío'}), 400
-    
-    if file and allowed_file(file.filename):
+    for file in files:
+        if file.filename == '':
+            return jsonify({'error': 'Nombre de archivo vacío'}), 400
+        
+        if not allowed_file(file.filename):
+            return jsonify({'error': 'Extensión de archivo no permitida, debe ser .zip'}), 400
+        
+    for file in files:        
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        return jsonify({'message': 'Archivo ZIP subido correctamente'}), 201
-    else:
-        return jsonify({'error': 'Extensión de archivo no permitida, debe ser .zip'}), 400
+    
+    return jsonify({'message': 'Archivos ZIP subidos correctamente'}), 201
 
 if __name__ == '__main__':
     if not os.path.exists(UPLOAD_FOLDER):
