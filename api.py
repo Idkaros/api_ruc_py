@@ -14,8 +14,8 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/zip', methods=['POST'])
-def upload_zip():
+@app.route('/zips', methods=['POST'])
+def upload_zips():
     if 'file' not in request.files:
         return jsonify({'error': 'No se ha proporcionado ningún archivo'}), 400
     
