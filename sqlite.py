@@ -15,7 +15,7 @@ def crear_estruc():
         CREATE TABLE IF NOT EXISTS contribuyentes (
             id INTEGER PRIMARY KEY,
             ruc INTEGER,
-            apellinombre TEXT,
+            nombre TEXT,
             dv INTEGER,
             codigo TEXT,
             estado TEXT
@@ -51,13 +51,13 @@ def insertar_txt():
             with open(file, "r") as archivo:
                 # Recorrer las líneas
                 for linea in archivo:
-                    ruc, apellinombre, dv, codigo, estado = linea.strip().split("|")
+                    ruc, nombre, dv, codigo, estado = linea.strip().split("|")
                     cursor.execute(
-                        "INSERT INTO contribuyentes(ruc, apellinombre, dv, codigo, estado) VALUES (?, '?', ?, ?, ?)",
-                        (ruc, apellinombre, dv, codigo, estado),
+                        "INSERT INTO contribuyentes(ruc, nombre, dv, codigo, estado) VALUES (?, '?', ?, ?, ?)",
+                        (ruc, nombre, dv, codigo, estado),
                     )
 
-def insertar_txt(ruc, apellinombre, dv, codigo, estado):
+def insertar_txt(ruc, nombre, dv, codigo, estado):
     conn = sqlite3.connect(BD_PRODUCCION)
     cursor = conn.cursor()
     cursor.execute(
@@ -67,14 +67,14 @@ def insertar_txt(ruc, apellinombre, dv, codigo, estado):
     resultado = cursor.fetchone()
     conn.close()
     if resultado[0] == 0:
-        __insertar_contribuyente(ruc, apellinombre, dv, codigo, estado)
+        __insertar_contribuyente(ruc, nombre, dv, codigo, estado)
 
-def __insertar_contribuyente(ruc, apellinombre, dv, codigo, estado):
+def __insertar_contribuyente(ruc, nombre, dv, codigo, estado):
     conn = sqlite3.connect(BD_PRODUCCION)
     cursor = conn.cursor()
     cursor.execute(
-        "INSERT INTO contribuyentes(ruc, apellinombre, dv, codigo, estado) VALUES (?, ?, ?, ?, ?)",
-        (ruc, apellinombre, dv, codigo, estado),
+        "INSERT INTO contribuyentes(ruc, nombre, dv, codigo, estado) VALUES (?, ?, ?, ?, ?)",
+        (ruc, nombre, dv, codigo, estado),
     )
     conn.commit()
     conn.close()

@@ -25,10 +25,10 @@ carpeta_txt = os.path.join(carpeta_actual, "txt_files")
 #            with open(txt_file_path, "r", encoding="utf-8") as archivo:
 #                # Recorrer las líneas
 #                for linea in archivo:
-#                    ruc, apellinombre, dv, codigo, estado, fin = linea.strip().split(
+#                    ruc, nombre, dv, codigo, estado, fin = linea.strip().split(
 #                        "|"
 #                    )
-#                    sq.insertar_txt(ruc, apellinombre, dv, codigo, estado)
+#                    sq.insertar_txt(ruc, nombre, dv, codigo, estado)
 #            os.remove(txt_file_path)
 
 
@@ -73,7 +73,7 @@ def insertar1raVez():
                     ci_ruc, nombre_razon, dv, codigo, estado, fin = linea.strip().split("|")
 
                     cursor.execute(
-                        "INSERT INTO contribuyentes(ruc, apellinombre, dv, codigo, estado) VALUES (?, ?, ?, ?, ?)",
+                        "INSERT INTO contribuyentes(ruc, nombre, dv, codigo, estado) VALUES (?, ?, ?, ?, ?)",
                         (ci_ruc, nombre_razon, dv, codigo, estado),
                     )
 
