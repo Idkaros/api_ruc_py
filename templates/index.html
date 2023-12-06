@@ -22,7 +22,7 @@
                 body: formData
             });
             const result = await response.json();
-            document.getElementById('result').innerText = JSON.stringify(result);
+            document.getElementById('result').innerText = result.message;
 
             // Clear the selected files list
             form.reset();
