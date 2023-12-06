@@ -81,8 +81,8 @@ def insertar1raVez():
             conn.commit()
             conn.close()
 
-            # Eliminar el archivo txt
-            os.remove(txt_file_path)
+            # # Eliminar el archivo txt
+            # os.remove(txt_file_path)
 
 
 def escribir_error(texto):
