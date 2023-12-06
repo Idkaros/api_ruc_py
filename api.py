@@ -1,7 +1,6 @@
 import os
 from flask import Flask, render_template, request, jsonify
 from werkzeug.utils import secure_filename
-import zipfile
 
 app = Flask(__name__)
 
