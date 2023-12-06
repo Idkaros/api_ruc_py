@@ -55,9 +55,14 @@ def insertar1raVez():
             with open(txt_file_path, "r", encoding="utf-8") as archivo:
                 # Recorrer las líneas
                 for linea in archivo:
-                    ## Si ha más de 2 pipes, reemplazar por 1
-                    # if validar_primera_ocurrencia(linea, "||"):
-                    #    linea = linea.replace("||", "|")
+
+                    if "6681449||" in linea:
+                        linea = linea.replace("6681449||", "6681449|")
+                    elif linea.count("|") == 6:
+                        linea = linea.replace("||", "|")
+                        linea = linea.replace("M|LLER", "MULLER")
+                        linea = linea.replace("N|", "N")
+                        linea = linea.replace("KASPROWICZ|", "KASPROWICZ")
 
                     # Si hay más de 5 campos, saltar
                     if linea.count("|") > 5:
