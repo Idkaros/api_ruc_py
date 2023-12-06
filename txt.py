@@ -70,13 +70,11 @@ def insertar1raVez():
                         continue
 
                     # Tomar datos de la línea
-                    ruc, apellinombre, dv, codigo, estado, fin = linea.strip().split(
-                        "|"
-                    )
+                    ci_ruc, nombre_razon, dv, codigo, estado, fin = linea.strip().split("|")
 
                     cursor.execute(
                         "INSERT INTO contribuyentes(ruc, apellinombre, dv, codigo, estado) VALUES (?, ?, ?, ?, ?)",
-                        (ruc, apellinombre, dv, codigo, estado),
+                        (ci_ruc, nombre_razon, dv, codigo, estado),
                     )
 
             # Comiteamos los datos y cerramos la conexión
