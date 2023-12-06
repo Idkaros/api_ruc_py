@@ -36,6 +36,8 @@ def insertar_txt():
 
     conn = sqlite3.connect(BD_PRODUCCION)
 
+    cursor = conn.cursor()
+
     # Carpeta actual
     carpeta_actual = os.getcwd()
 
