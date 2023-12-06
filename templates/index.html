@@ -9,5 +9,24 @@
         <input type="file" name="files" accept=".zip" multiple>
         <input type="submit" value="Upload">
     </form>
+    <br>
+    <div id="result"></div>
+    <!-- Capturar el resultado json del endpoint zips -->
+    <script>
+        document.querySelector('form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const formData = new FormData(form);
+            const response = await fetch(form.action, {
+                method: form.method,
+                body: formData
+            });
+            const result = await response.json();
+            document.getElementById('result').innerText = JSON.stringify(result);
+
+            // Clear the selected files list
+            form.reset();
+        });
+    </script>
 </body>
 </html>
