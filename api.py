@@ -5,7 +5,7 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 
 # Establecer la carpeta de carga para los archivos ZIP
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = 'zip_files'
 ALLOWED_EXTENSIONS = {'zip'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
