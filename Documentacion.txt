@@ -1,11 +1,17 @@
 Lista de funciones
-crear_estructura_de_tablas
-descomprimir archivo zip
-validar que no exista contenido de los arcihvos en la BD sqlite e insertar si no existen
-eliminar archivos txt
+	crear_estructura_de_tablas
+	descomprimir archivo zip
+	validar que no exista contenido de los arcihvos en la BD sqlite e insertar si no existen
+	eliminar archivos txt
 
 Entorno:
 Python 3.12.0
 Flask 3.0.0
 Flask-RESTful 0.3.10
 flask-restplus-0.13.0
+
+Descripción:
+Los archivos tienen líneas con los datos del contribuyente.
+Las líneas separan los campos de información con el caracter "|"(pipe).
+Los campos de información son 5: 1)el ruc o cédula de identidad, 2)nombre o razon social, 3)el digito verificador, 4)código y 5)estado del contribuyente.
+Hay algunas líneas que tienen 6 campos por error, porqué hay un caracter separador demás. En algunos casos están de forma consecutiva en otros no.
