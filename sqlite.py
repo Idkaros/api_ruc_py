@@ -2,7 +2,6 @@ import os
 import sqlite3
 
 BD_PRODUCCION = "ruc.db"
-BD_PASARELA = "ruc_pasarela.db"
 
 def crear_estruc():
     # Conectar a la BD o crearla si no existe
@@ -83,8 +82,4 @@ def __insertar_contribuyente(ruc, apellinombre, dv, codigo, estado):
 def eliminarBD():
     if os.path.exists(BD_PRODUCCION):
         os.remove(BD_PRODUCCION)
-
-    if os.path.exists(BD_PASARELA):
-        os.remove(BD_PASARELA)
-    
-    print("BD eliminadas")
+        print("BD eliminada")
