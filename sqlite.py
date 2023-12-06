@@ -1,11 +1,11 @@
 import os
 import sqlite3
 
-bd = "ruc.db"
+BD_PRODUCCION = "ruc.db"
 
 def crear_estruc():
     # Conectar a la BD o crearla si no existe
-    conn = sqlite3.connect(bd)
+    conn = sqlite3.connect(BD_PRODUCCION)
 
     cursor = conn.cursor()
 
@@ -33,7 +33,7 @@ def insertar_txt():
     # 2   Recorremos las líneas
     # 3     Insertamos solo los contribuyentes nuevos
 
-    conn = sqlite3.connect(bd)
+    conn = sqlite3.connect(BD_PRODUCCION)
 
     # Carpeta actual
     carpeta_actual = os.getcwd()
@@ -56,7 +56,7 @@ def insertar_txt():
                     )
 
 def insertar_txt(ruc, apellinombre, dv, codigo, estado):
-    conn = sqlite3.connect(bd)
+    conn = sqlite3.connect(BD_PRODUCCION)
     cursor = conn.cursor()
     cursor.execute(
         "SELECT COUNT(*) FROM contribuyentes WHERE ruc LIKE ?", ("%" + ruc + "%",)
@@ -68,7 +68,7 @@ def insertar_txt(ruc, apellinombre, dv, codigo, estado):
         __insertar_contribuyente(ruc, apellinombre, dv, codigo, estado)
 
 def __insertar_contribuyente(ruc, apellinombre, dv, codigo, estado):
-    conn = sqlite3.connect(bd)
+    conn = sqlite3.connect(BD_PRODUCCION)
     cursor = conn.cursor()
     cursor.execute(
         "INSERT INTO contribuyentes(ruc, apellinombre, dv, codigo, estado) VALUES (?, ?, ?, ?, ?)",
@@ -78,8 +78,8 @@ def __insertar_contribuyente(ruc, apellinombre, dv, codigo, estado):
     conn.close()
 
 def eliminarBD():
-    if os.path.exists(bd):
-        os.remove(bd)
+    if os.path.exists(BD_PRODUCCION):
+        os.remove(BD_PRODUCCION)
         print("BD eliminada")
     else:
         print("La BD no existe")
