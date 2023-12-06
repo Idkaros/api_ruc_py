@@ -4,7 +4,7 @@ import sqlite3
 BD_PRODUCCION = "ruc.db"
 BD_PASARELA = "ruc_pasarela.db"
 
-def crear_estruc():
+def crear_estruc_prod():
     # Conectar a la BD o crearla si no existe
     conn = sqlite3.connect(BD_PRODUCCION)
 
