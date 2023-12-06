@@ -35,7 +35,7 @@ def upload_zips():
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     
-    return jsonify({'message': 'Archivos ZIP subidos correctamente'}), 201
+    return jsonify({'message': 'Archivos ZIP subidos exitosamente'}), 201
 
 if __name__ == '__main__':
     if not os.path.exists(UPLOAD_FOLDER):
