@@ -3,6 +3,11 @@ import sqlite as sq
 import sqlite3
 #import datetime
 
+# Definir BD de producción
+BD_PASARELA = "ruc_pasarl.db"
+
+BD_PRODUCCION = "ruc_produc.db"
+
 # Carpeta actual
 carpeta_actual = os.getcwd()
 
@@ -43,7 +48,7 @@ def insertar1raVez():
         # Validar que el archivo sea txt
         if file.endswith(".txt"):
             # Conectar a la base de datos
-            conn = sqlite3.connect("ruc.db")
+            conn = sqlite3.connect(BD_PASARELA)
             cursor = conn.cursor()
 
             # Iniciar una transacción
@@ -84,6 +89,29 @@ def insertar1raVez():
             # # Eliminar el archivo txt
             # os.remove(txt_file_path)
 
+def insertar_producc():
+    # Insertamos desde la BD de pasarela a producción ordenado alfabéticamente por nombre
+
+    # Connect to the BD_PASARELA database
+    conn_pasarela = sqlite3.connect(BD_PASARELA)
+    cursor_pasarela = conn_pasarela.cursor()
+
+    # Connect to the BD_PRODUCCION database
+    conn_produccion = sqlite3.connect(BD_PRODUCCION)
+    cursor_produccion = conn_produccion.cursor()
+
+    # Read all records from the contribuyentes table in BD_PASARELA, ordered by name
+    cursor_pasarela.execute("SELECT ruc, nombre, dv, codigo, estado FROM contribuyentes ORDER BY ruc")
+    records = cursor_pasarela.fetchall()
+
+    # Insert all records into the contribuyentes table in BD_PRODUCCION
+    cursor_produccion.executemany("INSERT INTO contribuyentes(ruc, nombre, dv, codigo, estado) VALUES (?, ?, ?, ?, ?)", records)
+    #cursor_produccion.executemany("INSERT INTO contribuyentes VALUES (ruc, nombre, dv, codigo, estado)", records)
+
+    # Commit the changes and close the connections
+    conn_produccion.commit()
+    conn_produccion.close()
+    conn_pasarela.close()
 
 def escribir_error(texto):
     try:

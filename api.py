@@ -1,6 +1,10 @@
 import os
 from flask import Flask, render_template, request, jsonify
 from werkzeug.utils import secure_filename
+import zip
+import sqlite_pasarl as bd_pasarl
+import sqlite_produc as bd_produc
+import txt
 
 app = Flask(__name__)
 
@@ -34,6 +38,14 @@ def upload_zips():
     for file in files:        
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    
+    bd_pasarl.eliminarBD()
+    bd_produc.eliminarBD()
+    bd_pasarl.crear_estruc()
+    bd_produc.crear_estruc()
+    zip.unzip_ruc_files()
+    txt.insertar1raVez()
+    txt.insertar_producc()
     
     return jsonify({'message': 'Archivos ZIP subidos exitosamente'}), 201
 
