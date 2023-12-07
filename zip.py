@@ -2,6 +2,10 @@
 import zipfile
 import os
 
+# Mejoras a considerar:
+# leer y cargar todo el txt en memoria para después cerrar la conexión al txt.
+# pasar el contenido del txt en memoria a otro método y que este se encargue de meter en la BD
+
 def unzip_ruc_files():
 	#1 Recorrer archivos zip
 	#2	 Descomprimir(origen, destino)
