@@ -36,14 +36,47 @@
                 method: 'GET',
                 // No es necesario incluir body para una solicitud GET
             })
-                .then(response => response.json()) // Si el servidor responde con JSON
+                .then(response => response.json())
                 .then(data => {
                     console.log('Respuesta del servidor:', data);
-                    // Puedes realizar acciones adicionales según la respuesta del servidor
+                    mostrarResultadoEnGrilla(data);
                 })
                 .catch(error => {
                     console.error('Error al enviar la solicitud:', error);
                 });
+        }
+
+        function mostrarResultadoEnGrilla(data) {
+            var resultadoDiv = document.getElementById("resultado");
+
+            // Limpiar el contenido anterior
+            resultadoDiv.innerHTML = '';
+
+            // Crear tabla
+            var tabla = document.createElement("table");
+            tabla.border = "1";
+
+            // Crear encabezado
+            var encabezado = tabla.createTHead();
+            var filaEncabezado = encabezado.insertRow();
+            for (var i = 0; i < data[0].length; i++) {
+                var th = document.createElement("th");
+                th.innerHTML = "Columna " + (i + 1);
+                filaEncabezado.appendChild(th);
+            }
+
+            // Crear filas con datos
+            var cuerpoTabla = tabla.createTBody();
+            data.forEach(function (fila) {
+                var tr = cuerpoTabla.insertRow();
+                fila.forEach(function (valor) {
+                    var td = tr.insertCell();
+                    td.innerHTML = valor;
+                });
+            });
+
+            // Agregar tabla al div de resultado
+            resultadoDiv.appendChild(tabla);
         }
     </script>
 
