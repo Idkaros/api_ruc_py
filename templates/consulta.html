@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Consultar RUC</title>
+</head>
+
+<body>
+    <h1>Consultar RUC</h1>
+
+    <form action="http://localhost:5000/contribuyentes" method="GET">
+        <label for="ruc">Ingrese el RUC:</label>
+        <input type="text" id="ruc" name="ruc" required>
+        <button type="submit">Consultar</button>
+
+        <script>
+            document.getElementById("ruc").addEventListener("keyup", function (event) {
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                    document.querySelector("form").submit();
+                }
+            });
+        </script>
+    </form>
+
+</body>
+
+</html>
