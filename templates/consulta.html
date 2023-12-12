@@ -8,7 +8,7 @@
 <body>
     <h1>Consultar RUC</h1>
 
-    <form action="http://localhost:5000/contribuyentes" method="GET">
+    <form id="frmConsultas" onsubmit="enviarFormulario(event)">
         <label for="ruc">Ingrese el RUC:</label>
         <input type="text" id="ruc" name="ruc" required>
         <button type="submit">Consultar</button>
@@ -22,6 +22,30 @@
             });
         </script>
     </form>
+
+    <div id="resultado"></div>
+
+    <script>
+        function enviarFormulario(event) {
+            event.preventDefault(); // Evita que el formulario se envíe de forma convencional
+
+            var formulario = document.getElementById("frmConsultas");
+            var datos = new FormData(formulario);
+
+            fetch('http://localhost:5000/contribuyentes?' + new URLSearchParams(datos), {
+                method: 'GET',
+                // No es necesario incluir body para una solicitud GET
+            })
+                .then(response => response.json()) // Si el servidor responde con JSON
+                .then(data => {
+                    console.log('Respuesta del servidor:', data);
+                    // Puedes realizar acciones adicionales según la respuesta del servidor
+                })
+                .catch(error => {
+                    console.error('Error al enviar la solicitud:', error);
+                });
+        }
+    </script>
 
 </body>
 
