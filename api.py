@@ -49,6 +49,20 @@ def upload_zips():
     
     return jsonify({'message': 'Archivos ZIP subidos exitosamente'}), 201
 
+@app.route('/contribuyentes', methods=['GET'])
+def get_contribuyente():
+    # Lógica para obtener el contribuyente según su RUC
+    ruc = request.args.get('ruc')
+    contribuyente = obtener_contribuyentes(ruc)
+    
+    if contribuyente is None:
+        return jsonify({'error': 'Contribuyente no encontrado'}), 404
+    
+    return jsonify(contribuyente), 200
+
+def obtener_contribuyentes(ruc):
+    return bd_produc.obtener_contribuyentes(ruc)
+
 if __name__ == '__main__':
     if not os.path.exists(UPLOAD_FOLDER):
         os.mkdir(UPLOAD_FOLDER)

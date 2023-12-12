@@ -32,3 +32,17 @@ def eliminarBD():
     if os.path.exists(BD_PRODUCCION):
         os.remove(BD_PRODUCCION)
         print("BD eliminada")
+
+def obtener_contribuyentes(ruc):
+    conn = sqlite3.connect(BD_PRODUCCION)
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        SELECT ruc, nombre, dv, codigo, estado
+        FROM contribuyentes
+        WHERE ruc LIKE ?
+        """, (f'%{ruc}%',)
+    )
+    contribuyente = cursor.fetchone()
+    conn.close()
+    return contribuyente
