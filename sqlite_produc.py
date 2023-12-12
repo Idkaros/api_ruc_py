@@ -38,11 +38,11 @@ def obtener_contribuyentes(ruc):
     cursor = conn.cursor()
     cursor.execute(
         """
-        SELECT ruc, nombre, dv, codigo, estado
+        SELECT ruc || '-' || dv AS "ruc", nombre, estado
         FROM contribuyentes
         WHERE ruc LIKE ?
         """, (f'%{ruc}%',)
     )
-    contribuyente = cursor.fetchone()
+    contribuyente = cursor.fetchall()
     conn.close()
     return contribuyente
